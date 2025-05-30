@@ -39,21 +39,22 @@ Die Anwendung besteht aus folgenden Hauptkomponenten:
 
 2. Installieren Sie die Abhängigkeiten:
    ```
-   composer install
+   ddev composer install
    ```
 
 3. Konfigurieren Sie die Umgebungsvariablen in einer `.env.local` Datei:
    ```
    OPENAI_API_KEY=your_openai_api_key
    OPENAI_EMBEDDING_MODEL=text-embedding-3-small
-   ZILLIZ_API_KEY=your_zilliz_api_key
-   ZILLIZ_ENDPOINT=your_zilliz_endpoint
-   ZILLIZ_COLLECTION=products
+   MILVUS_API_KEY=your_zilliz_api_key
+   MILVUS_HOST=your_zilliz_endpoint
+   MILVUS_PORT=443
+   MILVUS_COLLECTION=products
    ```
 
 4. Starten Sie den Symfony-Server:
    ```
-   symfony server:start
+   ddev start
    ```
 
 ## Verwendung
@@ -63,7 +64,7 @@ Die Anwendung besteht aus folgenden Hauptkomponenten:
 Verwenden Sie den folgenden Befehl, um Produkte aus einer XML-Datei zu importieren:
 
 ```
-php bin/console app:import-products path/to/products.xml
+php bin/console app:import-products src/DataFixtures/xml/sample_products.xml
 ```
 
 Die API-Keys sind optional. Wenn sie nicht angegeben werden, verwendet die Anwendung Mock-Daten für Tests.
@@ -78,7 +79,7 @@ php bin/console app:test-search "Ich suche ein wasserdichtes Smartphone mit gute
 
 ### Web-Interface
 
-Öffnen Sie die Anwendung in Ihrem Browser unter `http://localhost:8000` und verwenden Sie die Chat-Schnittstelle, um Produkte zu finden.
+Öffnen Sie die Anwendung in Ihrem Browser unter `https://symfony-product-finder.ddev.site/` und verwenden Sie die Chat-Schnittstelle, um Produkte zu finden.
 
 ## Anpassung
 
@@ -99,7 +100,7 @@ Die Zilliz-Integration kann in `src/Service/ZillizVectorDBService.php` angepasst
 ### Tests ausführen
 
 ```
-php bin/phpunit
+ddev php bin/phpunit
 ```
 
 ### Neue Funktionen hinzufügen
