@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product>
+        <id>1</id>
+        <name>Samsung Galaxy S23 Ultra</name>
+        <sku>SAMS23U-128-BLK</sku>
+        <description>Das Samsung Galaxy S23 Ultra ist ein leistungsstarkes Smartphone mit einem 6,8-Zoll Dynamic AMOLED-Display, Snapdragon 8 Gen 2 Prozessor und einer 200-Megapixel-Hauptkamera. Es bietet eine hervorragende Leistung für anspruchsvolle Anwendungen und Spiele.</description>
+        <brand>Samsung</brand>
+        <category>Smartphones</category>
+        <price>1199.99</price>
+        <image_url>https://example.com/images/samsung-s23-ultra.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>42</stock>
+        <specifications>
+            <specification name="display">6,8 Zoll Dynamic AMOLED, 3088 x 1440 Pixel</specification>
+            <specification name="processor">Snapdragon 8 Gen 2</specification>
+            <specification name="ram">12GB</specification>
+            <specification name="storage">256GB</specification>
+            <specification name="camera">200MP Hauptkamera, 12MP Ultraweitwinkel, 10MP Teleobjektiv</specification>
+            <specification name="battery">5000mAh</specification>
+            <specification name="os">Android 13</specification>
+            <specification name="dimensions">163.4 x 78.1 x 8.9 mm</specification>
+            <specification name="weight">233g</specification>
+            <specification name="waterproof">IP68</specification>
+        </specifications>
+        <features>
+            <feature>S Pen integriert</feature>
+            <feature>Schnellladefunktion</feature>
+            <feature>Kabelloses Laden</feature>
+            <feature>5G-fähig</feature>
+            <feature>Ultraschall-Fingerabdrucksensor</feature>
+            <feature>Space Zoom bis zu 100x</feature>
+        </features>
+    </product>
+    <product>
+        <id>2</id>
+        <name>Apple iPhone 15 Pro</name>
+        <sku>APPL15P-256-GLD</sku>
+        <description>Das iPhone 15 Pro verfügt über ein 6,1-Zoll Super Retina XDR-Display, den A17 Pro Chip und ein fortschrittliches Kamerasystem mit 48 MP. Es bietet herausragende Leistung in einem eleganten Design aus Titan.</description>
+        <brand>Apple</brand>
+        <category>Smartphones</category>
+        <price>1199.00</price>
+        <image_url>https://example.com/images/iphone-15-pro.jpg</image_url>
+        <rating>4.9</rating>
+        <stock>35</stock>
+        <specifications>
+            <specification name="display">6,1 Zoll Super Retina XDR, 2556 x 1179 Pixel</specification>
+            <specification name="processor">A17 Pro Chip</specification>
+            <specification name="ram">8GB</specification>
+            <specification name="storage">256GB</specification>
+            <specification name="camera">48MP Hauptkamera, 12MP Ultraweitwinkel, 12MP Teleobjektiv</specification>
+            <specification name="battery">3274mAh</specification>
+            <specification name="os">iOS 17</specification>
+            <specification name="dimensions">146.6 x 70.6 x 8.25 mm</specification>
+            <specification name="weight">187g</specification>
+            <specification name="waterproof">IP68</specification>
+        </specifications>
+        <features>
+            <feature>Action Button</feature>
+            <feature>Dynamic Island</feature>
+            <feature>ProMotion-Technologie</feature>
+            <feature>MagSafe</feature>
+            <feature>Face ID</feature>
+            <feature>USB-C Anschluss</feature>
+        </features>
+    </product>
+    <product>
+        <id>3</id>
+        <name>Sony WH-1000XM5</name>
+        <sku>SONWH1000XM5-BLK</sku>
+        <description>Die Sony WH-1000XM5 sind kabellose Noise-Cancelling-Kopfhörer mit fortschrittlicher Geräuschunterdrückung, hervorragender Klangqualität und bis zu 30 Stunden Akkulaufzeit. Sie bieten kristallklaren Sound und maximalen Komfort.</description>
+        <brand>Sony</brand>
+        <category>Kopfhörer</category>
+        <price>399.99</price>
+        <image_url>https://example.com/images/sony-wh1000xm5.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>58</stock>
+        <specifications>
+            <specification name="type">Over-Ear</specification>
+            <specification name="connectivity">Bluetooth 5.2, 3.5mm Klinke</specification>
+            <specification name="battery">30 Stunden mit ANC</specification>
+            <specification name="charging">USB-C</specification>
+            <specification name="weight">250g</specification>
+            <specification name="driver">30mm</specification>
+            <specification name="frequency_response">4Hz-40,000Hz</specification>
+            <specification name="impedance">48 Ohm</specification>
+        </specifications>
+        <features>
+            <feature>Adaptive Noise Cancelling</feature>
+            <feature>Multipoint-Verbindung</feature>
+            <feature>Speak-to-Chat</feature>
+            <feature>Touch-Bedienelemente</feature>
+            <feature>Schnellladefunktion</feature>
+            <feature>Trageerkennung</feature>
+        </features>
+    </product>
+    <product>
+        <id>4</id>
+        <name>Dell XPS 15 (2023)</name>
+        <sku>DELLXPS15-i7-32-1TB</sku>
+        <description>Das Dell XPS 15 ist ein leistungsstarkes Premium-Notebook mit 15,6-Zoll 4K OLED-Display, Intel Core i7 Prozessor der 13. Generation, 32GB RAM und 1TB SSD. Es bietet hervorragende Leistung für kreative Arbeiten und anspruchsvolle Anwendungen.</description>
+        <brand>Dell</brand>
+        <category>Laptops</category>
+        <price>2499.00</price>
+        <image_url>https://example.com/images/dell-xps-15.jpg</image_url>
+        <rating>4.6</rating>
+        <stock>15</stock>
+        <specifications>
+            <specification name="display">15,6 Zoll 4K OLED, 3840 x 2400 Pixel</specification>
+            <specification name="processor">Intel Core i7-13700H</specification>
+            <specification name="ram">32GB DDR5</specification>
+            <specification name="storage">1TB NVMe SSD</specification>
+            <specification name="graphics">NVIDIA GeForce RTX 4060</specification>
+            <specification name="battery">86Wh</specification>
+            <specification name="os">Windows 11 Pro</specification>
+            <specification name="ports">2x Thunderbolt 4, 1x USB-C 3.2, SD-Kartenleser, Kopfhörerbuchse</specification>
+            <specification name="dimensions">344.4 x 230.1 x 18 mm</specification>
+            <specification name="weight">1.96kg</specification>
+        </specifications>
+        <features>
+            <feature>CNC-gefräste Aluminiumkonstruktion</feature>
+            <feature>Karbonfaser-Handballenauflage</feature>
+            <feature>Präzisions-Touchpad</feature>
+            <feature>Hintergrundbeleuchtete Tastatur</feature>
+            <feature>Windows Hello Gesichtserkennung</feature>
+            <feature>Quad-Lautsprecher mit Waves MaxxAudio</feature>
+        </features>
+    </product>
+    <product>
+        <id>5</id>
+        <name>LG OLED C3 65 Zoll</name>
+        <sku>LGOLED65C3-2023</sku>
+        <description>Der LG OLED C3 ist ein 65-Zoll-Fernseher mit 4K OLED-Display, α9 Gen6 AI-Prozessor und Dolby Vision IQ. Er bietet hervorragende Bildqualität mit perfektem Schwarz, lebendigen Farben und unterstützt alle wichtigen HDR-Formate.</description>
+        <brand>LG</brand>
+        <category>Fernseher</category>
+        <price>2299.00</price>
+        <image_url>https://example.com/images/lg-oled-c3-65.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>22</stock>
+        <specifications>
+            <specification name="display">65 Zoll 4K OLED, 3840 x 2160 Pixel</specification>
+            <specification name="processor">α9 Gen6 AI-Prozessor</specification>
+            <specification name="refresh_rate">120Hz</specification>
+            <specification name="hdr">Dolby Vision IQ, HDR10, HLG</specification>
+            <specification name="audio">2.2-Kanal, 40W, Dolby Atmos</specification>
+            <specification name="smart_tv">webOS 23</specification>
+            <specification name="connectivity">4x HDMI 2.1, 3x USB, Wi-Fi 6, Bluetooth 5.0</specification>
+            <specification name="dimensions">1441 x 830 x 41.1 mm (ohne Standfuß)</specification>
+            <specification name="weight">23.9kg (mit Standfuß)</specification>
+        </specifications>
+        <features>
+            <feature>OLED evo Panel</feature>
+            <feature>G-SYNC und FreeSync Premium</feature>
+            <feature>Filmmaker Mode</feature>
+            <feature>AI Picture Pro</feature>
+            <feature>AI Sound Pro</feature>
+            <feature>Game Optimizer</feature>
+        </features>
+    </product>
+</products>
