@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <products>
-    <!-- ...existing code... -->
     <product>
         <id>6</id>
         <name>Google Pixel 8 Pro</name>
@@ -96,7 +95,7 @@
     </product>
     <product>
         <id>9</id>
-        <name>Philips Hue White & Color Ambiance Starter Kit</name>
+        <name>Philips Hue White and Color Ambiance Starter Kit</name>
         <sku>PHIHUEKIT-E27-4P</sku>
         <description>Das Philips Hue Starter Kit enthält vier E27-Lampen und eine Bridge. Es ermöglicht smarte Lichtsteuerung mit Millionen Farben und Sprachsteuerung.</description>
         <brand>Philips</brand>
@@ -556,7 +555,7 @@
         </specifications>
         <features>
             <feature>Dual Pixel Autofokus</feature>
-            <feature>WLAN & Bluetooth</feature>
+            <feature>WLAN and Bluetooth</feature>
             <feature>Vari-Angle Display</feature>
             <feature>Intervallaufnahme</feature>
         </features>
@@ -743,7 +742,7 @@
         <rating>4.5</rating>
         <stock>36</stock>
         <specifications>
-            <specification name="sensoren">Innen & Außen</specification>
+            <specification name="sensoren">Innen und Außen</specification>
             <specification name="verbindung">WLAN</specification>
             <specification name="app">iOS, Android</specification>
             <specification name="stromversorgung">USB</specification>
@@ -987,7 +986,7 @@
         <rating>4.5</rating>
         <stock>36</stock>
         <specifications>
-            <specification name="sensoren">Innen & Außen</specification>
+            <specification name="sensoren">Innen und Außen</specification>
             <specification name="verbindung">WLAN</specification>
             <specification name="app">iOS, Android</specification>
             <specification name="stromversorgung">USB</specification>
@@ -1092,7 +1091,7 @@
         <features>
             <feature>Automatische Backups</feature>
             <feature>Passwortschutz</feature>
-            <feature>Kompatibel mit Windows & Mac</feature>
+            <feature>Kompatibel mit Windows und Mac</feature>
         </features>
     </product>
     <product>
@@ -1297,7 +1296,7 @@
         <rating>4.7</rating>
         <stock>18</stock>
         <specifications>
-            <specification name="filter">HEPA & Aktivkohle</specification>
+            <specification name="filter">HEPA und Aktivkohle</specification>
             <specification name="steuerung">App, Fernbedienung</specification>
             <specification name="gewicht">3,7kg</specification>
             <specification name="funktionen">Luftreiniger, Ventilator</specification>
