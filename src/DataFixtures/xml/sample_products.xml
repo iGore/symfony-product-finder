@@ -1,5 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <products>
+    <!-- ...existing code... -->
+    <product>
+        <id>6</id>
+        <name>Google Pixel 8 Pro</name>
+        <sku>GOOPIX8P-128-BLU</sku>
+        <description>Das Google Pixel 8 Pro bietet ein 6,7-Zoll LTPO OLED-Display, den Google Tensor G3 Prozessor und eine vielseitige Triple-Kamera. Es überzeugt durch smarte Software und lange Update-Garantie.</description>
+        <brand>Google</brand>
+        <category>Smartphones</category>
+        <price>1099.00</price>
+        <image_url>https://example.com/images/pixel-8-pro.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>28</stock>
+        <specifications>
+            <specification name="display">6,7 Zoll LTPO OLED, 2992 x 1344 Pixel</specification>
+            <specification name="processor">Google Tensor G3</specification>
+            <specification name="ram">12GB</specification>
+            <specification name="storage">128GB</specification>
+            <specification name="camera">50MP Hauptkamera, 48MP Ultraweitwinkel, 48MP Tele</specification>
+            <specification name="battery">5050mAh</specification>
+            <specification name="os">Android 14</specification>
+            <specification name="dimensions">162.6 x 76.5 x 8.8 mm</specification>
+            <specification name="weight">213g</specification>
+            <specification name="waterproof">IP68</specification>
+        </specifications>
+        <features>
+            <feature>Face Unlock</feature>
+            <feature>Tensor Sicherheitschip</feature>
+            <feature>5 Jahre Updates</feature>
+            <feature>Wireless Charging</feature>
+            <feature>Always-On Display</feature>
+            <feature>Magic Eraser</feature>
+        </features>
+    </product>
+    <product>
+        <id>7</id>
+        <name>Bose QuietComfort Ultra</name>
+        <sku>BOSEQCULTRA-SIL</sku>
+        <description>Die Bose QuietComfort Ultra bieten erstklassige Geräuschunterdrückung, exzellenten Klang und hohen Tragekomfort für Musikliebhaber und Vielreisende.</description>
+        <brand>Bose</brand>
+        <category>Kopfhörer</category>
+        <price>429.00</price>
+        <image_url>https://example.com/images/bose-qc-ultra.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>40</stock>
+        <specifications>
+            <specification name="type">Over-Ear</specification>
+            <specification name="connectivity">Bluetooth 5.3, Klinke</specification>
+            <specification name="battery">24 Stunden</specification>
+            <specification name="charging">USB-C</specification>
+            <specification name="weight">250g</specification>
+            <specification name="noise_cancelling">Active</specification>
+            <specification name="microphone">Ja</specification>
+        </specifications>
+        <features>
+            <feature>CustomTune Klangkalibrierung</feature>
+            <feature>Multipoint</feature>
+            <feature>Touch-Steuerung</feature>
+            <feature>Transparenzmodus</feature>
+            <feature>Trageerkennung</feature>
+            <feature>Sprachassistent</feature>
+        </features>
+    </product>
+    <product>
+        <id>8</id>
+        <name>Lenovo ThinkPad X1 Carbon Gen 11</name>
+        <sku>LENX1C11-I5-16-512</sku>
+        <description>Das Lenovo ThinkPad X1 Carbon Gen 11 ist ein ultraleichtes Business-Notebook mit 14-Zoll WUXGA-Display, Intel Core i5 Prozessor, 16GB RAM und 512GB SSD.</description>
+        <brand>Lenovo</brand>
+        <category>Laptops</category>
+        <price>1799.00</price>
+        <image_url>https://example.com/images/thinkpad-x1-carbon.jpg</image_url>
+        <rating>4.5</rating>
+        <stock>18</stock>
+        <specifications>
+            <specification name="display">14 Zoll WUXGA, 1920 x 1200 Pixel</specification>
+            <specification name="processor">Intel Core i5-1335U</specification>
+            <specification name="ram">16GB LPDDR5</specification>
+            <specification name="storage">512GB SSD</specification>
+            <specification name="graphics">Intel Iris Xe</specification>
+            <specification name="battery">57Wh</specification>
+            <specification name="os">Windows 11 Pro</specification>
+            <specification name="ports">2x Thunderbolt 4, 2x USB-A, HDMI, Klinke</specification>
+            <specification name="dimensions">315 x 222 x 15 mm</specification>
+            <specification name="weight">1.12kg</specification>
+        </specifications>
+        <features>
+            <feature>Fingerprint Reader</feature>
+            <feature>Dolby Atmos Lautsprecher</feature>
+            <feature>Backlit Keyboard</feature>
+            <feature>Wi-Fi 6E</feature>
+            <feature>Privacy Guard</feature>
+            <feature>HD Webcam mit IR</feature>
+        </features>
+    </product>
+    <product>
+        <id>9</id>
+        <name>Philips Hue White & Color Ambiance Starter Kit</name>
+        <sku>PHIHUEKIT-E27-4P</sku>
+        <description>Das Philips Hue Starter Kit enthält vier E27-Lampen und eine Bridge. Es ermöglicht smarte Lichtsteuerung mit Millionen Farben und Sprachsteuerung.</description>
+        <brand>Philips</brand>
+        <category>Smart Home</category>
+        <price>179.99</price>
+        <image_url>https://example.com/images/philips-hue-kit.jpg</image_url>
+        <rating>4.6</rating>
+        <stock>60</stock>
+        <specifications>
+            <specification name="lamp_type">E27 LED</specification>
+            <specification name="color">16 Mio. Farben</specification>
+            <specification name="connectivity">Zigbee, Bluetooth</specification>
+            <specification name="bridge">Enthalten</specification>
+            <specification name="app">iOS, Android</specification>
+            <specification name="voice_control">Alexa, Google Assistant, Apple HomeKit</specification>
+        </specifications>
+        <features>
+            <feature>Dimmbar</feature>
+            <feature>Zeitschaltpläne</feature>
+            <feature>Fernsteuerung</feature>
+            <feature>Gruppensteuerung</feature>
+            <feature>Geofencing</feature>
+            <feature>Musik-Synchronisation</feature>
+        </features>
+    </product>
+    <product>
+        <id>10</id>
+        <name>Samsung Odyssey G9</name>
+        <sku>SAMODG9-49INCH</sku>
+        <description>Der Samsung Odyssey G9 ist ein 49-Zoll Curved Gaming-Monitor mit QHD-Auflösung, 240Hz Bildwiederholrate und Quantum Dot-Technologie für beeindruckende Gaming-Erlebnisse.</description>
+        <brand>Samsung</brand>
+        <category>Monitore</category>
+        <price>1399.00</price>
+        <image_url>https://example.com/images/samsung-odyssey-g9.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>10</stock>
+        <specifications>
+            <specification name="display">49 Zoll Curved QHD, 5120 x 1440 Pixel</specification>
+            <specification name="refresh_rate">240Hz</specification>
+            <specification name="panel">VA, Quantum Dot</specification>
+            <specification name="response_time">1ms</specification>
+            <specification name="connectivity">2x DisplayPort, HDMI, USB Hub</specification>
+            <specification name="curvature">1000R</specification>
+            <specification name="hdr">HDR1000</specification>
+        </specifications>
+        <features>
+            <feature>G-SYNC Compatible</feature>
+            <feature>Picture-by-Picture</feature>
+            <feature>RGB-Beleuchtung</feature>
+            <feature>Ergonomischer Standfuß</feature>
+            <feature>Eye Saver Mode</feature>
+            <feature>Game Mode</feature>
+        </features>
+    </product>
+    <!-- ...existing code... -->
     <product>
         <id>1</id>
         <name>Samsung Galaxy S23 Ultra</name>
@@ -155,6 +307,502 @@
             <feature>AI Picture Pro</feature>
             <feature>AI Sound Pro</feature>
             <feature>Game Optimizer</feature>
+        </features>
+    </product>
+    <product>
+        <id>11</id>
+        <name>Apple MacBook Air M3</name>
+        <sku>APMBAIRM3-16-512</sku>
+        <description>Das neue MacBook Air mit M3 Chip bietet eine herausragende Performance, ein brillantes 13,6-Zoll Liquid Retina Display und eine Akkulaufzeit von bis zu 18 Stunden.</description>
+        <brand>Apple</brand>
+        <category>Laptops</category>
+        <price>1599.00</price>
+        <image_url>https://example.com/images/macbook-air-m3.jpg</image_url>
+        <rating>4.9</rating>
+        <stock>25</stock>
+        <specifications>
+            <specification name="display">13,6 Zoll Liquid Retina, 2560 x 1664 Pixel</specification>
+            <specification name="processor">Apple M3</specification>
+            <specification name="ram">16GB</specification>
+            <specification name="storage">512GB SSD</specification>
+            <specification name="battery">18h</specification>
+            <specification name="os">macOS Sonoma</specification>
+            <specification name="weight">1.24kg</specification>
+        </specifications>
+        <features>
+            <feature>Touch ID</feature>
+            <feature>MagSafe 3</feature>
+            <feature>Thunderbolt 4</feature>
+            <feature>Wi-Fi 6E</feature>
+            <feature>Backlit Keyboard</feature>
+            <feature>Force Touch Trackpad</feature>
+        </features>
+    </product>
+    <product>
+        <id>12</id>
+        <name>JBL Flip 7</name>
+        <sku>JBLFLIP7-BLK</sku>
+        <description>Der JBL Flip 7 ist ein tragbarer Bluetooth-Lautsprecher mit kraftvollem Sound, 20 Stunden Akkulaufzeit und IP67-Wasserschutz.</description>
+        <brand>JBL</brand>
+        <category>Lautsprecher</category>
+        <price>129.99</price>
+        <image_url>https://example.com/images/jbl-flip-7.jpg</image_url>
+        <rating>4.6</rating>
+        <stock>80</stock>
+        <specifications>
+            <specification name="type">Bluetooth</specification>
+            <specification name="battery">20h</specification>
+            <specification name="waterproof">IP67</specification>
+            <specification name="weight">540g</specification>
+            <specification name="charging">USB-C</specification>
+        </specifications>
+        <features>
+            <feature>PartyBoost</feature>
+            <feature>Freisprechfunktion</feature>
+            <feature>Mehrere Farben</feature>
+            <feature>Outdoor-tauglich</feature>
+        </features>
+    </product>
+    <product>
+        <id>13</id>
+        <name>Amazon Kindle Paperwhite 11. Gen</name>
+        <sku>KINDLEPW11-8GB</sku>
+        <description>Der Kindle Paperwhite der 11. Generation bietet ein blendfreies 6,8-Zoll-Display, verstellbare Farbtemperatur und wochenlange Akkulaufzeit.</description>
+        <brand>Amazon</brand>
+        <category>E-Reader</category>
+        <price>149.99</price>
+        <image_url>https://example.com/images/kindle-paperwhite-11.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>120</stock>
+        <specifications>
+            <specification name="display">6,8 Zoll E-Ink</specification>
+            <specification name="storage">8GB</specification>
+            <specification name="waterproof">IPX8</specification>
+            <specification name="battery">bis zu 10 Wochen</specification>
+            <specification name="weight">205g</specification>
+        </specifications>
+        <features>
+            <feature>Verstellbare Farbtemperatur</feature>
+            <feature>Wasserfest</feature>
+            <feature>Bluetooth für Hörbücher</feature>
+            <feature>USB-C Ladeanschluss</feature>
+        </features>
+    </product>
+    <product>
+        <id>14</id>
+        <name>Garmin Forerunner 265</name>
+        <sku>GARFOR265-BLK</sku>
+        <description>Die Garmin Forerunner 265 ist eine GPS-Laufuhr mit AMOLED-Display, Trainingsanalysen und Musikfunktion.</description>
+        <brand>Garmin</brand>
+        <category>Wearables</category>
+        <price>499.00</price>
+        <image_url>https://example.com/images/garmin-forerunner-265.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>33</stock>
+        <specifications>
+            <specification name="display">1,3 Zoll AMOLED</specification>
+            <specification name="battery">bis zu 13 Tage</specification>
+            <specification name="gps">Ja</specification>
+            <specification name="weight">47g</specification>
+            <specification name="waterproof">5 ATM</specification>
+        </specifications>
+        <features>
+            <feature>Musikfunktion</feature>
+            <feature>Herzfrequenzmessung</feature>
+            <feature>VO2max</feature>
+            <feature>Garmin Pay</feature>
+            <feature>Trainingspläne</feature>
+        </features>
+    </product>
+    <product>
+        <id>15</id>
+        <name>Philips Airfryer XXL</name>
+        <sku>PHIAIRFRY-XXL</sku>
+        <description>Der Philips Airfryer XXL bereitet Speisen mit wenig oder ganz ohne Öl zu und bietet Platz für bis zu 1,4kg Pommes.</description>
+        <brand>Philips</brand>
+        <category>Küchengeräte</category>
+        <price>249.00</price>
+        <image_url>https://example.com/images/philips-airfryer-xxl.jpg</image_url>
+        <rating>4.5</rating>
+        <stock>50</stock>
+        <specifications>
+            <specification name="kapazität">1,4kg</specification>
+            <specification name="leistung">2225W</specification>
+            <specification name="programme">5</specification>
+            <specification name="gewicht">7,99kg</specification>
+        </specifications>
+        <features>
+            <feature>Fettarmes Frittieren</feature>
+            <feature>Spülmaschinenfeste Teile</feature>
+            <feature>Digitales Display</feature>
+            <feature>Warmhaltefunktion</feature>
+        </features>
+    </product>
+    <product>
+        <id>16</id>
+        <name>Logitech MX Master 3S</name>
+        <sku>LOGMXM3S-GRAPH</sku>
+        <description>Die Logitech MX Master 3S ist eine ergonomische Maus mit MagSpeed-Scrollrad, anpassbaren Tasten und leisen Klicks.</description>
+        <brand>Logitech</brand>
+        <category>Mäuse</category>
+        <price>119.99</price>
+        <image_url>https://example.com/images/logitech-mx-master-3s.jpg</image_url>
+        <rating>4.9</rating>
+        <stock>70</stock>
+        <specifications>
+            <specification name="sensor">8K DPI</specification>
+            <specification name="connectivity">Bluetooth, Logi Bolt</specification>
+            <specification name="battery">bis zu 70 Tage</specification>
+            <specification name="gewicht">141g</specification>
+        </specifications>
+        <features>
+            <feature>MagSpeed-Scrollrad</feature>
+            <feature>Flow-Steuerung</feature>
+            <feature>USB-C Schnellladung</feature>
+            <feature>Leise Klicks</feature>
+        </features>
+    </product>
+    <product>
+        <id>17</id>
+        <name>TP-Link Deco X50 Mesh WLAN Set</name>
+        <sku>TPLDECOX50-3P</sku>
+        <description>Das TP-Link Deco X50 Mesh WLAN Set sorgt für schnelles und stabiles WLAN im ganzen Haus mit Wi-Fi 6 und bis zu 650m² Abdeckung.</description>
+        <brand>TP-Link</brand>
+        <category>Netzwerk</category>
+        <price>249.99</price>
+        <image_url>https://example.com/images/tplink-deco-x50.jpg</image_url>
+        <rating>4.6</rating>
+        <stock>45</stock>
+        <specifications>
+            <specification name="wifi">Wi-Fi 6 (AX3000)</specification>
+            <specification name="abdeckung">bis zu 650m²</specification>
+            <specification name="einheiten">3</specification>
+            <specification name="anschlüsse">2x Gigabit LAN pro Einheit</specification>
+        </specifications>
+        <features>
+            <feature>Kindersicherung</feature>
+            <feature>App-Steuerung</feature>
+            <feature>Gastnetzwerk</feature>
+            <feature>Nahtloses Roaming</feature>
+        </features>
+    </product>
+    <product>
+        <id>18</id>
+        <name>Samsung Galaxy Tab S9 FE</name>
+        <sku>SAMTABS9FE-128-GR</sku>
+        <description>Das Galaxy Tab S9 FE bietet ein 10,9-Zoll-Display, S Pen Unterstützung und eine lange Akkulaufzeit für produktives Arbeiten und Entertainment.</description>
+        <brand>Samsung</brand>
+        <category>Tablets</category>
+        <price>549.00</price>
+        <image_url>https://example.com/images/galaxy-tab-s9-fe.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>38</stock>
+        <specifications>
+            <specification name="display">10,9 Zoll TFT, 2304 x 1440 Pixel</specification>
+            <specification name="processor">Exynos 1380</specification>
+            <specification name="ram">6GB</specification>
+            <specification name="storage">128GB</specification>
+            <specification name="battery">8000mAh</specification>
+            <specification name="os">Android 13</specification>
+        </specifications>
+        <features>
+            <feature>S Pen inklusive</feature>
+            <feature>Wasser- und staubgeschützt (IP68)</feature>
+            <feature>Dolby Atmos Lautsprecher</feature>
+            <feature>Samsung DeX</feature>
+        </features>
+    </product>
+    <product>
+        <id>19</id>
+        <name>Dyson V15 Detect Absolute</name>
+        <sku>DYSONV15-ABS</sku>
+        <description>Der Dyson V15 Detect Absolute ist ein kabelloser Staubsauger mit Laser-Stauberkennung, starker Saugleistung und LCD-Anzeige.</description>
+        <brand>Dyson</brand>
+        <category>Haushalt</category>
+        <price>699.00</price>
+        <image_url>https://example.com/images/dyson-v15.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>27</stock>
+        <specifications>
+            <specification name="akku">bis zu 60 Minuten</specification>
+            <specification name="gewicht">3,1kg</specification>
+            <specification name="staubbehälter">0,76l</specification>
+            <specification name="filter">HEPA</specification>
+        </specifications>
+        <features>
+            <feature>Laser-Stauberkennung</feature>
+            <feature>LCD-Anzeige</feature>
+            <feature>Automatische Saugkraftanpassung</feature>
+            <feature>Vielseitiges Zubehör</feature>
+        </features>
+    </product>
+    <product>
+        <id>20</id>
+        <name>Canon EOS R50 Kit</name>
+        <sku>CANONR50-1855</sku>
+        <description>Die Canon EOS R50 ist eine spiegellose Systemkamera mit 24,2 MP, 4K-Video und vielseitigem 18-55mm Objektiv.</description>
+        <brand>Canon</brand>
+        <category>Kameras</category>
+        <price>899.00</price>
+        <image_url>https://example.com/images/canon-eos-r50.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>14</stock>
+        <specifications>
+            <specification name="sensor">24,2 MP APS-C</specification>
+            <specification name="video">4K 30p</specification>
+            <specification name="display">3 Zoll Touchscreen</specification>
+            <specification name="akku">bis zu 370 Aufnahmen</specification>
+            <specification name="gewicht">375g</specification>
+        </specifications>
+        <features>
+            <feature>Dual Pixel Autofokus</feature>
+            <feature>WLAN & Bluetooth</feature>
+            <feature>Vari-Angle Display</feature>
+            <feature>Intervallaufnahme</feature>
+        </features>
+    </product>
+    <product>
+        <id>21</id>
+        <name>Microsoft Surface Pro 9</name>
+        <sku>MSFPRO9-I7-16-512</sku>
+        <description>Das Surface Pro 9 vereint die Flexibilität eines Tablets mit der Leistung eines Laptops. Mit 13-Zoll PixelSense-Display und Intel Core i7.</description>
+        <brand>Microsoft</brand>
+        <category>Tablets</category>
+        <price>1799.00</price>
+        <image_url>https://example.com/images/surface-pro-9.jpg</image_url>
+        <rating>4.6</rating>
+        <stock>19</stock>
+        <specifications>
+            <specification name="display">13 Zoll PixelSense, 2880 x 1920 Pixel</specification>
+            <specification name="processor">Intel Core i7-1255U</specification>
+            <specification name="ram">16GB</specification>
+            <specification name="storage">512GB SSD</specification>
+            <specification name="battery">bis zu 15,5h</specification>
+            <specification name="os">Windows 11</specification>
+        </specifications>
+        <features>
+            <feature>Touchscreen</feature>
+            <feature>Face ID</feature>
+            <feature>Thunderbolt 4</feature>
+            <feature>Abnehmbares Keyboard</feature>
+        </features>
+    </product>
+    <product>
+        <id>22</id>
+        <name>Fossil Gen 6 Smartwatch</name>
+        <sku>FOSGEN6-BLK</sku>
+        <description>Die Fossil Gen 6 Smartwatch bietet ein AMOLED-Display, Herzfrequenzmessung, SpO2 und Google Wear OS.</description>
+        <brand>Fossil</brand>
+        <category>Wearables</category>
+        <price>299.00</price>
+        <image_url>https://example.com/images/fossil-gen6.jpg</image_url>
+        <rating>4.4</rating>
+        <stock>44</stock>
+        <specifications>
+            <specification name="display">1,28 Zoll AMOLED</specification>
+            <specification name="battery">24h</specification>
+            <specification name="os">Wear OS</specification>
+            <specification name="waterproof">3 ATM</specification>
+        </specifications>
+        <features>
+            <feature>Herzfrequenzmessung</feature>
+            <feature>SpO2-Sensor</feature>
+            <feature>GPS</feature>
+            <feature>Google Assistant</feature>
+        </features>
+    </product>
+    <product>
+        <id>23</id>
+        <name>AEG Lavamat L8FE74485</name>
+        <sku>AEGL8FE74485</sku>
+        <description>Die AEG Lavamat Waschmaschine mit 8kg Fassungsvermögen, ProSteam-Technologie und Energieeffizienzklasse A.</description>
+        <brand>AEG</brand>
+        <category>Haushalt</category>
+        <price>649.00</price>
+        <image_url>https://example.com/images/aeg-lavamat.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>12</stock>
+        <specifications>
+            <specification name="kapazität">8kg</specification>
+            <specification name="energieeffizienz">A</specification>
+            <specification name="programme">10</specification>
+            <specification name="abmessungen">85 x 60 x 57 cm</specification>
+        </specifications>
+        <features>
+            <feature>ProSteam</feature>
+            <feature>ProSense</feature>
+            <feature>Startzeitvorwahl</feature>
+            <feature>Kindersicherung</feature>
+        </features>
+    </product>
+    <product>
+        <id>24</id>
+        <name>GoPro HERO12 Black</name>
+        <sku>GOPROH12BLK</sku>
+        <description>Die GoPro HERO12 Black ist eine Actioncam mit 5,3K-Video, HyperSmooth 6.0 und wasserdicht bis 10m.</description>
+        <brand>GoPro</brand>
+        <category>Kameras</category>
+        <price>449.00</price>
+        <image_url>https://example.com/images/gopro-hero12.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>32</stock>
+        <specifications>
+            <specification name="video">5,3K 60fps</specification>
+            <specification name="waterproof">10m</specification>
+            <specification name="battery">1720mAh</specification>
+            <specification name="gewicht">153g</specification>
+        </specifications>
+        <features>
+            <feature>HyperSmooth 6.0</feature>
+            <feature>TimeWarp 3.0</feature>
+            <feature>Sprachsteuerung</feature>
+            <feature>Webcam-Modus</feature>
+        </features>
+    </product>
+    <product>
+        <id>25</id>
+        <name>HP ENVY Inspire 7920e</name>
+        <sku>HPENVY7920E</sku>
+        <description>Multifunktionsdrucker mit WLAN, Duplexdruck, Scan und HP+ Smart-Funktionen.</description>
+        <brand>HP</brand>
+        <category>Drucker</category>
+        <price>179.00</price>
+        <image_url>https://example.com/images/hp-envy-7920e.jpg</image_url>
+        <rating>4.3</rating>
+        <stock>60</stock>
+        <specifications>
+            <specification name="drucktechnologie">Tintenstrahl</specification>
+            <specification name="funktionen">Drucken, Scannen, Kopieren</specification>
+            <specification name="anschluss">WLAN, USB</specification>
+            <specification name="papierformat">A4</specification>
+        </specifications>
+        <features>
+            <feature>Duplexdruck</feature>
+            <feature>HP+ Smart</feature>
+            <feature>Mobiles Drucken</feature>
+            <feature>Randlosdruck</feature>
+        </features>
+    </product>
+    <product>
+        <id>26</id>
+        <name>Apple AirPods Pro (2. Generation)</name>
+        <sku>AIRPODSPRO2</sku>
+        <description>Die AirPods Pro bieten aktives Noise Cancelling, Transparenzmodus und personalisiertes 3D-Audio.</description>
+        <brand>Apple</brand>
+        <category>Kopfhörer</category>
+        <price>279.00</price>
+        <image_url>https://example.com/images/airpods-pro-2.jpg</image_url>
+        <rating>4.8</rating>
+        <stock>100</stock>
+        <specifications>
+            <specification name="typ">In-Ear</specification>
+            <specification name="akku">bis zu 6h</specification>
+            <specification name="ladecase">MagSafe</specification>
+            <specification name="gewicht">5,3g pro Ohrhörer</specification>
+        </specifications>
+        <features>
+            <feature>Aktives Noise Cancelling</feature>
+            <feature>Transparenzmodus</feature>
+            <feature>3D-Audio</feature>
+            <feature>Siri Integration</feature>
+        </features>
+    </product>
+    <product>
+        <id>27</id>
+        <name>Philips Sonicare DiamondClean 9000</name>
+        <sku>PHISONIC9000</sku>
+        <description>Elektrische Schallzahnbürste mit 4 Putzprogrammen, Drucksensor und Bluetooth-App.</description>
+        <brand>Philips</brand>
+        <category>Gesundheit</category>
+        <price>199.00</price>
+        <image_url>https://example.com/images/sonicare-9000.jpg</image_url>
+        <rating>4.7</rating>
+        <stock>55</stock>
+        <specifications>
+            <specification name="putzprogramme">4</specification>
+            <specification name="akku">bis zu 14 Tage</specification>
+            <specification name="ladeart">Glas-Ladestation</specification>
+            <specification name="gewicht">133g</specification>
+        </specifications>
+        <features>
+            <feature>Drucksensor</feature>
+            <feature>Bürstenkopf-Erkennung</feature>
+            <feature>Bluetooth-App</feature>
+            <feature>Reiseetui</feature>
+        </features>
+    </product>
+    <product>
+        <id>28</id>
+        <name>Netatmo Wetterstation</name>
+        <sku>NETATMO-WS</sku>
+        <description>Die Netatmo Wetterstation misst Temperatur, Luftfeuchtigkeit, CO2 und Luftdruck – alles per App abrufbar.</description>
+        <brand>Netatmo</brand>
+        <category>Smart Home</category>
+        <price>179.99</price>
+        <image_url>https://example.com/images/netatmo-ws.jpg</image_url>
+        <rating>4.5</rating>
+        <stock>36</stock>
+        <specifications>
+            <specification name="sensoren">Innen & Außen</specification>
+            <specification name="verbindung">WLAN</specification>
+            <specification name="app">iOS, Android</specification>
+            <specification name="stromversorgung">USB</specification>
+        </specifications>
+        <features>
+            <feature>CO2-Messung</feature>
+            <feature>Wetterwarnungen</feature>
+            <feature>Sprachsteuerung</feature>
+            <feature>Erweiterbar</feature>
+        </features>
+    </product>
+    <product>
+        <id>29</id>
+        <name>Samsung T7 Shield 2TB</name>
+        <sku>SAMT7SHIELD-2TB</sku>
+        <description>Robuste externe SSD mit 2TB, USB 3.2 Gen2 und IP65-Schutz gegen Wasser und Staub.</description>
+        <brand>Samsung</brand>
+        <category>Speicher</category>
+        <price>189.00</price>
+        <image_url>https://example.com/images/samsung-t7-shield.jpg</image_url>
+        <rating>4.9</rating>
+        <stock>77</stock>
+        <specifications>
+            <specification name="kapazität">2TB</specification>
+            <specification name="schnittstelle">USB 3.2 Gen2</specification>
+            <specification name="geschwindigkeit">bis zu 1050 MB/s</specification>
+            <specification name="gewicht">98g</specification>
+            <specification name="schutz">IP65</specification>
+        </specifications>
+        <features>
+            <feature>Stoßfest</feature>
+            <feature>Wasser- und Staubschutz</feature>
+            <feature>Passwortschutz</feature>
+            <feature>Kompatibel mit PC, Mac, Android</feature>
+        </features>
+    </product>
+    <product>
+        <id>30</id>
+        <name>De'Longhi Magnifica S ECAM 22.110.B</name>
+        <sku>DELONGHI-ECAM22110B</sku>
+        <description>Kaffeevollautomat mit Milchaufschäumer, 13-stufigem Mahlwerk und programmierbarer Kaffeestärke.</description>
+        <brand>De'Longhi</brand>
+        <category>Küchengeräte</category>
+        <price>349.00</price>
+        <image_url>https://example.com/images/delonghi-magnifica.jpg</image_url>
+        <rating>4.6</rating>
+        <stock>29</stock>
+        <specifications>
+            <specification name="leistung">1450W</specification>
+            <specification name="wassertank">1,8l</specification>
+            <specification name="bohnenbehälter">250g</specification>
+            <specification name="mahlwerk">13-stufig</specification>
+            <specification name="gewicht">9kg</specification>
+        </specifications>
+        <features>
+            <feature>Milchaufschäumer</feature>
+            <feature>Automatische Abschaltung</feature>
+            <feature>2-Tassen-Funktion</feature>
+            <feature>Leicht zu reinigen</feature>
         </features>
     </product>
 </products>
