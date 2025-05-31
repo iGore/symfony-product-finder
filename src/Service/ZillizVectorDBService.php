@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
 use HelgeSverre\Milvus\Milvus as MilvusClient;
 
 /**
@@ -30,18 +31,26 @@ class ZillizVectorDBService
     private int $dimension;
 
     /**
+     * EntityManager instance for database operations
+     */
+    private EntityManagerInterface $entityManager;
+
+    /**
      * Constructor
      * 
      * @param MilvusClient $milvus The Milvus client instance
+     * @param EntityManagerInterface $entityManager The Doctrine entity manager
      * @param string $collectionName The name of the collection to use (default: 'products')
      * @param int $dimension The dimension of the vector embeddings (default: 1536)
      */
     public function __construct(
         MilvusClient $milvus,
+        EntityManagerInterface $entityManager,
         string $collectionName = 'products',
         int $dimension = 1536
     ) {
         $this->milvus = $milvus;
+        $this->entityManager = $entityManager;
         $this->collectionName = $collectionName;
         $this->dimension = $dimension;
     }
@@ -181,5 +190,38 @@ class ZillizVectorDBService
         } catch (\Throwable $e) {
             return [];
         }
+    }
+
+    /**
+     * Search for products by keywords in name or description.
+     *
+     * @param string $query The search query string (keywords separated by space).
+     * @param int $limit The maximum number of products to return.
+     * @return array<int, Product> An array of Product entities.
+     */
+    public function keywordSearch(string $query, int $limit = 5): array
+    {
+        $keywords = array_filter(explode(' ', $query));
+
+        if (empty($keywords)) {
+            return [];
+        }
+
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->select('p')
+            ->from(Product::class, 'p');
+
+        $orX = $qb->expr()->orX();
+        foreach ($keywords as $index => $keyword) {
+            $placeholder = ':keyword' . $index;
+            $orX->add($qb->expr()->like('p.name', $placeholder));
+            $orX->add($qb->expr()->like('p.description', $placeholder));
+            $qb->setParameter($placeholder, '%' . $keyword . '%');
+        }
+        $qb->where($orX);
+
+        $qb->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
     }
 }
