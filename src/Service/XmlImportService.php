@@ -3,27 +3,30 @@
 namespace App\Service;
 
 use App\Entity\Product;
-use Symfony\Component\Serializer\SerializerInterface;
+use App\Serializer\ProductXmlSerializer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class XmlImportService
 {
-    private SerializerInterface $serializer;
     private ValidatorInterface $validator;
+    private ProductXmlSerializer $productXmlSerializer;
 
     public function __construct(
-        SerializerInterface $serializer,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        ProductXmlSerializer $productXmlSerializer
     ) {
-        $this->serializer = $serializer;
         $this->validator = $validator;
+        $this->productXmlSerializer = $productXmlSerializer;
     }
 
     /**
      * Import products from XML file
      * 
      * @param string $xmlFilePath Path to XML file
-     * @return array Array of Product objects
+     * @return array<Product> Array of validated Product objects
+     * @throws \InvalidArgumentException If the file doesn't exist
+     * @throws \RuntimeException If the XML is invalid or products fail validation
      */
     public function importFromFile(string $xmlFilePath): array
     {
@@ -32,6 +35,10 @@ class XmlImportService
         }
 
         $xmlContent = file_get_contents($xmlFilePath);
+        if ($xmlContent === false) {
+            throw new \RuntimeException("Failed to read XML file: $xmlFilePath");
+        }
+
         return $this->importFromString($xmlContent);
     }
 
@@ -39,95 +46,73 @@ class XmlImportService
      * Import products from XML string
      * 
      * @param string $xmlContent XML content
-     * @return array Array of Product objects
+     * @return array<Product> Array of validated Product objects
+     * @throws \RuntimeException If the XML is invalid or products fail validation
      */
     public function importFromString(string $xmlContent): array
     {
-        $products = [];
-        
-        // Parse XML
-        $xml = new \SimpleXMLElement($xmlContent);
-        
-        // Process each product node
-        foreach ($xml->product as $productNode) {
-            $product = $this->createProductFromXmlNode($productNode);
-            $products[] = $product;
+        try {
+            $products = [];
+
+            // Enable user error handling for libxml
+            libxml_use_internal_errors(true);
+
+            // Attempt to parse XML
+            $xml = simplexml_load_string($xmlContent, \SimpleXMLElement::class, LIBXML_NOERROR);
+
+            // Check for XML parsing errors
+            $errors = libxml_get_errors();
+            libxml_clear_errors();
+
+            if ($xml === false || !empty($errors)) {
+                throw new \RuntimeException('Invalid XML format');
+            }
+
+            // Process each product node
+            foreach ($xml->product as $productNode) {
+                $product = $this->productXmlSerializer->deserialize($productNode);
+                $this->validateProduct($product);
+                $products[] = $product;
+            }
+
+            return $products;
+        } catch (\Exception $e) {
+            throw new \RuntimeException("Error processing XML: " . $e->getMessage(), 0, $e);
         }
-        
-        return $products;
     }
 
     /**
-     * Create a Product object from XML node
+     * Validate a product using the validator
      * 
-     * @param \SimpleXMLElement $productNode
-     * @return Product
+     * @param Product $product
+     * @throws \RuntimeException If validation fails
      */
-    private function createProductFromXmlNode(\SimpleXMLElement $productNode): Product
+    private function validateProduct(Product $product): void
     {
-        $product = new Product();
-        
-        // Map basic properties
-        if (isset($productNode->id)) {
-            $product->setId((int)$productNode->id);
+        $violations = $this->validator->validate($product);
+
+        if (count($violations) > 0) {
+            throw new \RuntimeException($this->formatViolations($violations));
         }
-        
-        if (isset($productNode->name)) {
-            $product->setName((string)$productNode->name);
+    }
+
+    /**
+     * Format validation violations into a readable string
+     * 
+     * @param ConstraintViolationListInterface $violations
+     * @return string
+     */
+    private function formatViolations(ConstraintViolationListInterface $violations): string
+    {
+        $errors = [];
+        foreach ($violations as $violation) {
+            $errors[] = sprintf(
+                '%s: %s',
+                $violation->getPropertyPath(),
+                $violation->getMessage()
+            );
         }
-        
-        if (isset($productNode->sku)) {
-            $product->setSku((string)$productNode->sku);
-        }
-        
-        if (isset($productNode->description)) {
-            $product->setDescription((string)$productNode->description);
-        }
-        
-        if (isset($productNode->brand)) {
-            $product->setBrand((string)$productNode->brand);
-        }
-        
-        if (isset($productNode->category)) {
-            $product->setCategory((string)$productNode->category);
-        }
-        
-        if (isset($productNode->price)) {
-            $product->setPrice((float)$productNode->price);
-        }
-        
-        if (isset($productNode->image_url)) {
-            $product->setImageUrl((string)$productNode->image_url);
-        }
-        
-        if (isset($productNode->rating)) {
-            $product->setRating((float)$productNode->rating);
-        }
-        
-        if (isset($productNode->stock)) {
-            $product->setStock((int)$productNode->stock);
-        }
-        
-        // Process specifications
-        $specifications = [];
-        if (isset($productNode->specifications) && isset($productNode->specifications->specification)) {
-            foreach ($productNode->specifications->specification as $spec) {
-                $name = (string)$spec->attributes()->name;
-                $value = (string)$spec;
-                $specifications[$name] = $value;
-            }
-        }
-        $product->setSpecifications($specifications);
-        
-        // Process features
-        $features = [];
-        if (isset($productNode->features) && isset($productNode->features->feature)) {
-            foreach ($productNode->features->feature as $feature) {
-                $features[] = (string)$feature;
-            }
-        }
-        $product->setFeatures($features);
-        
-        return $product;
+
+        return "Product validation failed: " . implode(', ', $errors);
     }
 }
