@@ -20,17 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Factory\MilvusClientFactory: ~
-
-    Milvus\Client:
-        factory: ['@App\Factory\MilvusClientFactory', 'create']
+    App\Service\OpenAIEmbeddingGenerator:
         arguments:
-            $host: '%env(MILVUS_HOST)%'
-            $port: '%env(int:MILVUS_PORT)%'
-            $token: '%env(MILVUS_API_KEY)%'
-
-    App\Service\ZillizVectorDBService:
-        arguments:
-            $milvus: '@Milvus\Client'
-            $collectionName: '%env(MILVUS_COLLECTION)%'
-            $dimension: 1536
+            $apiKey: '%env(OPENAI_API_KEY)%'
+            $embeddingModel: '%env(OPENAI_EMBEDDING_MODEL)%'

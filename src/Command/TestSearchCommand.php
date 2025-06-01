@@ -2,27 +2,24 @@
 
 namespace App\Command;
 
-use App\Service\EmbeddingGeneratorInterface;
-use App\Service\ZillizVectorDBService;
-use Symfony\Component\Console\Attribute\AsCommand;
+use App\Service\OpenAIEmbeddingGenerator;
+use App\Service\LLPhantVectorDBService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand(
-    name: 'app:test-search',
-    description: 'Test the product search functionality with a natural language query',
-)]
 class TestSearchCommand extends Command
 {
-    private EmbeddingGeneratorInterface $embeddingGenerator;
-    private ZillizVectorDBService $vectorDBService;
+    protected static $defaultName = 'app:test-search';
+
+    private OpenAIEmbeddingGenerator $embeddingGenerator;
+    private LLPhantVectorDBService $vectorDBService;
 
     public function __construct(
-        EmbeddingGeneratorInterface $embeddingGenerator,
-        ZillizVectorDBService $vectorDBService
+        OpenAIEmbeddingGenerator $embeddingGenerator,
+        LLPhantVectorDBService $vectorDBService
     ) {
         parent::__construct();
         $this->embeddingGenerator = $embeddingGenerator;
@@ -32,7 +29,8 @@ class TestSearchCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('query', InputArgument::REQUIRED, 'Natural language search query');
+            ->setDescription('Tests the vector search functionality.')
+            ->addArgument('query', InputArgument::REQUIRED, 'The search query string.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -40,44 +38,52 @@ class TestSearchCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $query = $input->getArgument('query');
 
-        $io->title('Testing product search');
-        $io->section('Search query: ' . $query);
+        if (empty($query)) {
+            $io->error('Query cannot be empty.');
+            return Command::INVALID;
+        }
+
+        $io->title("Performing search for: \"{$query}\"");
 
         try {
-            // Generate embedding for the query
+            // 1. Generate query embedding
             $io->text('Generating embedding for the query...');
             $queryEmbedding = $this->embeddingGenerator->generateQueryEmbedding($query);
-            $io->success('Successfully generated embedding for the query');
+            if (empty($queryEmbedding)) {
+                $io->error('Failed to generate query embedding.');
+                return Command::FAILURE;
+            }
+            $io->text('Query embedding generated.');
 
-            // Search for similar products
-            $io->text('Searching for similar products...');
+            // 2. Perform search
+            $io->text('Searching for similar products (top 5)...');
+            // Using the default limit of 5 as assumed in LLPhantVectorDBService
             $results = $this->vectorDBService->searchSimilarProducts($queryEmbedding, 5);
-            
+
             if (empty($results)) {
-                $io->warning('No products found matching the query');
-                return Command::SUCCESS;
+                $io->warning('No similar products found.');
+            } else {
+                $io->success(count($results) . ' similar products found:');
+                $tableHeaders = ['ID', 'Name']; // Assuming 'score' might not be there yet
+                $tableRows = [];
+                foreach ($results as $productData) {
+                    // $productData is assumed to be an array like ['id' => ..., 'name' => ...]
+                    // as constructed in LLPhantVectorDBService
+                    $tableRows[] = [
+                        $productData['id'] ?? 'N/A',
+                        $productData['name'] ?? 'N/A',
+                        // $productData['score'] ?? 'N/A' // If score becomes available
+                    ];
+                }
+                $io->table($tableHeaders, $tableRows);
             }
-            
-            $io->success(sprintf('Found %d products matching the query', count($results)));
-            
-            // Display results
-            $io->section('Search results:');
-            $table = [];
-            foreach ($results as $index => $result) {
-                $table[] = [
-                    $index + 1,
-                    $result['primary_key'] ?? 'N/A',
-                    $result['title'] ?? 'Unknown product',
-                    $result['distance'] ?? 'N/A',
-                ];
-            }
-            
-            $io->table(['#', 'ID', 'Product Name', 'Similarity Score'], $table);
-            
-            return Command::SUCCESS;
+
         } catch (\Exception $e) {
-            $io->error('An error occurred during search: ' . $e->getMessage());
+            $io->error('An error occurred: ' . $e->getMessage());
+            $io->writeln($e->getTraceAsString());
             return Command::FAILURE;
         }
+
+        return Command::SUCCESS;
     }
 }
