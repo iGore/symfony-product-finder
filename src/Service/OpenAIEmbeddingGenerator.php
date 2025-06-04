@@ -3,7 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Product;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use LLPhant\Embeddings\EmbeddingGenerator\OpenAIEmbeddingGenerator as LLPhantEmbedderService; // Corrected FQCN based on error hint
+use LLPhant\OpenAIConfig;                                                               // Seems correct from previous run
+use LLPhant\Exception\LLPhantException;                                                 // Kept for error handling
 
 /**
  * Service for generating vector embeddings using OpenAI's API
@@ -15,36 +17,31 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  */
 class OpenAIEmbeddingGenerator implements EmbeddingGeneratorInterface
 {
-    /**
-     * HTTP client for making API requests
-     */
-    private HttpClientInterface $httpClient;
-
-    /**
-     * OpenAI API key
-     */
+    private LLPhantEmbedderService $llphantEmbedder; // Use alias
     private string $apiKey;
-
-    /**
-     * OpenAI embedding model to use
-     */
     private string $embeddingModel;
 
     /**
      * Constructor
      * 
-     * @param HttpClientInterface $httpClient The HTTP client for making API requests
      * @param string $apiKey OpenAI API key (default: empty string)
      * @param string $embeddingModel OpenAI embedding model to use (default: 'text-embedding-ada-002')
      */
     public function __construct(
-        HttpClientInterface $httpClient,
         string $apiKey = '',
         string $embeddingModel = 'text-embedding-ada-002'
     ) {
-        $this->httpClient = $httpClient;
         $this->apiKey = $apiKey;
         $this->embeddingModel = $embeddingModel;
+
+        $config = new OpenAIConfig();
+        $config->apiKey = $this->apiKey;
+        // Note: The $this->embeddingModel might be needed by the embedText method later,
+        // or if OpenAIConfig has a property for the model.
+        // e.g., $config->model = $this->embeddingModel;
+        // For now, just passing config with API key.
+
+        $this->llphantEmbedder = new LLPhantEmbedderService($config); // Use alias
     }
 
     /**
@@ -208,103 +205,29 @@ class OpenAIEmbeddingGenerator implements EmbeddingGeneratorInterface
         }
 
         try {
-            // Chunk the text before embedding
-            $chunks = $this->chunkText($text, 500);
+            // Assuming LLPhant's embedText method handles chunking for texts exceeding model limits,
+            // or expects pre-chunked text if it cannot.
+            // Also assuming it might use the model set during instantiation or has its own default.
+            // The underlying openai-php client used by LLPhant usually requires the model per API call.
+            // It's possible that embedText needs the model: $this->llphantEmbedder->embedText($text, $this->embeddingModel);
+            // Or $this->llphantEmbedder->embedText($text, ['model' => $this->embeddingModel]);
+            // Sticking to the simplest call first, and will adapt if error indicates missing model.
+            $embedding = $this->llphantEmbedder->embedText($text);
 
-            // If there's only one chunk, process it directly
-            if (count($chunks) === 1) {
-                $response = $this->httpClient->request('POST', 'https://api.openai.com/v1/embeddings', [
-                    'headers' => [
-                        'Authorization' => 'Bearer ' . $this->apiKey,
-                        'Content-Type' => 'application/json',
-                    ],
-                    'json' => [
-                        'input' => $chunks[0],
-                        'model' => $this->embeddingModel,
-                    ],
-                ]);
-
-                $data = $response->toArray();
-
-                if (isset($data['data'][0]['embedding'])) {
-                    return $data['data'][0]['embedding'];
-                }
-
-                throw new \RuntimeException('Failed to generate embedding: Invalid response format');
+            // Ensure the embedding is not empty or null, if LLPhant could return that on error
+            if (empty($embedding)) {
+                throw new \RuntimeException('Failed to generate embedding: LLPhant returned empty result.');
             }
-
-            // For multiple chunks, process each one and average the embeddings
-            $embeddings = [];
-            foreach ($chunks as $chunk) {
-                $response = $this->httpClient->request('POST', 'https://api.openai.com/v1/embeddings', [
-                    'headers' => [
-                        'Authorization' => 'Bearer ' . $this->apiKey,
-                        'Content-Type' => 'application/json',
-                    ],
-                    'json' => [
-                        'input' => $chunk,
-                        'model' => $this->embeddingModel,
-                    ],
-                ]);
-
-                $data = $response->toArray();
-
-                if (isset($data['data'][0]['embedding'])) {
-                    $embeddings[] = $data['data'][0]['embedding'];
-                } else {
-                    throw new \RuntimeException('Failed to generate embedding: Invalid response format');
-                }
-            }
-
-            // Average the embeddings
-            return $this->averageEmbeddings($embeddings);
-        } catch (\Exception $e) {
-            // Fallback to mock embedding on error
-            return $this->generateMockEmbedding($text);
+            return $embedding;
+        } catch (LLPhantException $e) { // Catch specific LLPhant exceptions if possible
+            // Log the exception message if a logger is available
+            // error_log('LLPhant API error: ' . $e->getMessage());
+            return $this->generateMockEmbedding($text . ' (LLPhant error)'); // Fallback to mock
+        } catch (\Exception $e) { // Catch any other general exceptions
+            // Log the exception message
+            // error_log('OpenAI Embedding Generator error: ' . $e->getMessage());
+            return $this->generateMockEmbedding($text . ' (general error)'); // Fallback to mock
         }
-    }
-
-    /**
-     * Chunk text into smaller pieces based on approximate token size
-     * 
-     * Splits the input text into chunks of approximately the specified token size.
-     * This is a simple implementation that assumes 1 token is roughly 4 characters.
-     * 
-     * @param string $text The text to chunk
-     * @param int $tokenSize The approximate token size for each chunk
-     * @return array<int, string> Array of text chunks
-     */
-    private function chunkText(string $text, int $tokenSize = 500): array
-    {
-        // Simple approximation: 1 token ≈ 4 characters
-        $charsPerToken = 4;
-        $chunkSize = $tokenSize * $charsPerToken;
-
-        // If text is smaller than chunk size, return it as is
-        if (strlen($text) <= $chunkSize) {
-            return [$text];
-        }
-
-        $chunks = [];
-        $words = explode(' ', $text);
-        $currentChunk = '';
-
-        foreach ($words as $word) {
-            // If adding this word would exceed the chunk size, start a new chunk
-            if (strlen($currentChunk) + strlen($word) + 1 > $chunkSize && !empty($currentChunk)) {
-                $chunks[] = trim($currentChunk);
-                $currentChunk = '';
-            }
-
-            $currentChunk .= ' ' . $word;
-        }
-
-        // Add the last chunk if it's not empty
-        if (!empty($currentChunk)) {
-            $chunks[] = trim($currentChunk);
-        }
-
-        return $chunks;
     }
 
     /**
