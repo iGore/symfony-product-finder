@@ -35,6 +35,13 @@ class TestSearchCommand extends Command
             ->addArgument('query', InputArgument::REQUIRED, 'Natural language search query');
     }
 
+    /**
+     * Executes the console command to search for products matching a natural language query.
+     *
+     * Retrieves the query argument, generates its embedding, searches for similar products, and displays the results in a table. Returns a success or failure status based on the outcome.
+     *
+     * @return int Command exit status (success or failure).
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
