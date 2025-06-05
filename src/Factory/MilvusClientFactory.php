@@ -13,12 +13,12 @@ use HelgeSverre\Milvus\Milvus as MilvusClient;
 class MilvusClientFactory
 {
     /**
-     * Create a new Milvus client instance
-     * 
-     * @param string $host The hostname or IP address of the Milvus server
-     * @param int $port The port number of the Milvus server
-     * @param string $token The authentication token for the Milvus server
-     * @return MilvusClient A configured Milvus client instance
+     * Creates and returns a new Milvus client configured with the specified authentication token, host, and port.
+     *
+     * @param string $token Authentication token for the Milvus server.
+     * @param string $host Hostname or IP address of the Milvus server.
+     * @param int $port Port number of the Milvus server.
+     * @return MilvusClient Configured Milvus client instance.
      */
     public static function create(string $token, string $host, int $port): MilvusClient
     {

@@ -30,11 +30,10 @@ class ZillizVectorDBService
     private int $dimension;
 
     /**
-     * Constructor
-     * 
-     * @param MilvusClient $milvus The Milvus client instance
-     * @param string $collectionName The name of the collection to use (default: 'products')
-     * @param int $dimension The dimension of the vector embeddings (default: 1536)
+     * Initializes the ZillizVectorDBService with the specified Milvus client, collection name, and embedding dimension.
+     *
+     * @param string $collectionName Name of the collection to use in the vector database. Defaults to 'default'.
+     * @param int $dimension Dimension of the vector embeddings. Defaults to 1536.
      */
     public function __construct(
         MilvusClient $milvus,
@@ -47,12 +46,11 @@ class ZillizVectorDBService
     }
 
     /**
-     * Initialize the vector database collection
-     * 
-     * Checks if the collection exists and returns true if it does.
-     * Currently, collection creation is commented out.
-     * 
-     * @return bool True if the collection exists or was created successfully, false otherwise
+     * Checks if the specified vector database collection exists.
+     *
+     * Returns true if the collection exists; otherwise, returns false.
+     *
+     * @return bool True if the collection exists, false otherwise.
      */
     public function initializeCollection(): bool
     {
@@ -95,13 +93,12 @@ class ZillizVectorDBService
     }
 
     /**
-     * Insert multiple products into the vector database
-     * 
-     * Iterates through the provided products array and inserts each valid product
-     * with embeddings into the vector database.
-     * 
-     * @param array<int, Product> $products Array of Product objects to insert
-     * @return bool True if all insertions were successful, false if any failed
+     * Inserts multiple products with embeddings into the vector database.
+     *
+     * Each product in the array is inserted as a vector record if it has valid embeddings.
+     *
+     * @param array<int, Product> $products List of Product objects to insert.
+     * @return bool True if all valid products are inserted successfully; false on any failure.
      */
     public function insertProducts(array $products): bool
     {
@@ -129,14 +126,13 @@ class ZillizVectorDBService
     }
 
     /**
-     * Insert product features into the vector database
-     * 
-     * Iterates through the provided product's features and inserts each feature
-     * with its embedding into the vector database.
-     * 
-     * @param Product $product The product whose features to insert
-     * @param array<string, array<int, float>> $featureEmbeddings Array of feature embeddings
-     * @return bool True if all insertions were successful, false if any failed
+     * Inserts the features of a product and their embeddings into the vector database.
+     *
+     * For each feature of the given product that has a corresponding embedding, creates a vector record in the collection with relevant product information.
+     *
+     * @param Product $product The product whose features are being inserted.
+     * @param array<string, array<int, float>> $featureEmbeddings Embeddings keyed by feature name.
+     * @return bool True if all insertions succeed or if there are no features/embeddings; false if an error occurs.
      */
     public function insertProductFeatures(Product $product, array $featureEmbeddings): bool
     {
@@ -170,14 +166,13 @@ class ZillizVectorDBService
     }
 
     /**
-     * Insert product specifications into the vector database
-     * 
-     * Iterates through the provided product's specifications and inserts each specification
-     * with its embedding into the vector database.
-     * 
-     * @param Product $product The product whose specifications to insert
-     * @param array<string, array<int, float>> $specificationEmbeddings Array of specification embeddings
-     * @return bool True if all insertions were successful, false if any failed
+     * Inserts a product's specifications and their embeddings into the vector database.
+     *
+     * For each specification of the given product, stores its text and corresponding embedding as a vector record in the collection. Skips specifications without embeddings. Returns true if all insertions succeed or if there are no specifications or embeddings; returns false on error.
+     *
+     * @param Product $product The product whose specifications are to be inserted.
+     * @param array<string, array<int, float>> $specificationEmbeddings Embeddings keyed by specification text.
+     * @return bool True if all insertions succeed or if there is nothing to insert; false on failure.
      */
     public function insertProductSpecifications(Product $product, array $specificationEmbeddings): bool
     {
@@ -214,14 +209,13 @@ class ZillizVectorDBService
     }
 
     /**
-     * Search for products similar to the provided query embedding
-     * 
-     * Performs a vector similarity search in the database using the provided
-     * query embedding vector.
-     * 
-     * @param array<int, float> $queryEmbedding The embedding vector to search with
-     * @param int $limit Maximum number of results to return (default: 5)
-     * @return array<int, mixed> Array of search results, each containing product information
+     * Searches for products in the vector database that are most similar to the given embedding.
+     *
+     * Performs a vector similarity search using the provided embedding and returns up to the specified number of matching products.
+     *
+     * @param array<int, float> $queryEmbedding Embedding vector to use as the search query.
+     * @param int $limit Maximum number of similar products to return.
+     * @return array<int, mixed> List of matching products, each containing product information such as id, title, and link. Returns an empty array if no matches are found or on error.
      */
     public function searchSimilarProducts(array $queryEmbedding, int $limit = 5): array
     {
