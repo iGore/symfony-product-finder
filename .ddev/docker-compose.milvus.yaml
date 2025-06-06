@@ -66,7 +66,7 @@ services:
       com.ddev.approot: ${DDEV_APPROOT}
   attu:
     container_name: ddev-${DDEV_SITENAME}-attu
-    image: zilliz/attu:v2.3.10
+    image: zilliz/attu:v2.5.11
     expose:
       - "3000"
     environment:
