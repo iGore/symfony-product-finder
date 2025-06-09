@@ -40,7 +40,7 @@ services:
       com.ddev.approot: ${DDEV_APPROOT}
   milvus:
     container_name: ddev-${DDEV_SITENAME}-milvus
-    image: milvusdb/milvus:v2.4.1
+    image: milvusdb/milvus:v2.5.13
     command: ["milvus", "run", "standalone"]
     security_opt:
       - seccomp:unconfined
