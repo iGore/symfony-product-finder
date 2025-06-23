@@ -48,5 +48,11 @@ services:
         arguments:
             $chatModel: '%env(OPENAI_CHAT_MODEL)%'
 
-    # Bind the interface to the implementation
+    App\Service\OpenAIImageDescriptionService:
+        arguments:
+            # Client and Logger will be autowired
+            $openAiVisionModel: '%env(OPENAI_VISION_MODEL)%'
+
+    # Bind the interfaces to their concrete implementations
     App\Service\SearchServiceInterface: '@App\Service\OpenAISearchService'
+    App\Service\ImageDescriptionServiceInterface: '@App\Service\OpenAIImageDescriptionService'

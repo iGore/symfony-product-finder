@@ -23,6 +23,14 @@
                             <input type="text" id="user-input" class="form-control" placeholder="z.B. Ich suche ein wasserdichtes Smartphone mit guter Kamera...">
                             <button class="btn btn-primary" id="send-button">Suchen</button>
                         </div>
+                        <div class="input-group mt-2">
+                            <input type="file" id="image-upload" class="form-control" accept="image/*">
+                            <button class="btn btn-secondary" id="upload-image-button">Bild hochladen & Suchen</button>
+                        </div>
+                        <div id="image-preview-container" class="mt-2" style="display: none;">
+                            <img id="image-preview" src="#" alt="Vorschau" style="max-width: 100px; max-height: 100px;"/>
+                            <button id="clear-image-preview" class="btn btn-sm btn-danger ms-2">Entfernen</button>
+                        </div>
                     </div>
                     
                     <div id="results-container" class="mt-4" style="display: none;">
@@ -75,13 +83,40 @@
         const chatMessages = document.getElementById('chat-messages');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
+        const imageUpload = document.getElementById('image-upload');
+        const uploadImageButton = document.getElementById('upload-image-button');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const clearImagePreviewButton = document.getElementById('clear-image-preview');
         const resultsContainer = document.getElementById('results-container');
         const productResults = document.getElementById('product-results');
         
-        function addMessage(content, isUser = false) {
+        let currentImageFile = null;
+
+        imageUpload.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                currentImageFile = file;
+                imagePreview.src = URL.createObjectURL(file);
+                imagePreviewContainer.style.display = 'block';
+            }
+        });
+
+        clearImagePreviewButton.addEventListener('click', function() {
+            currentImageFile = null;
+            imageUpload.value = ''; // Reset file input
+            imagePreview.src = '#';
+            imagePreviewContainer.style.display = 'none';
+        });
+
+        function addMessage(content, isUser = false, isHtml = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = isUser ? 'message user-message' : 'message system-message';
-            messageDiv.innerHTML = `<p>${content}</p>`;
+            if (isHtml) {
+                messageDiv.innerHTML = content;
+            } else {
+                messageDiv.innerHTML = `<p>${content}</p>`;
+            }
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -99,15 +134,12 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Add assistant response
                     addMessage(data.response, false);
-                    
-                    // Display results
                     if (data.products && data.products.length > 0) {
-                        displayProducts(data.products);
+                        displayProducts(data.products, data.uploadedImageUrl, data.imageDescription);
                     }
                 } else {
-                    addMessage('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.', false);
+                    addMessage(data.message || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.', false);
                 }
             })
             .catch(error => {
@@ -115,9 +147,64 @@
                 addMessage('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.', false);
             });
         }
+
+        function searchProductsWithImage(imageFile, query) {
+            const formData = new FormData();
+            formData.append('image', imageFile);
+            if (query) {
+                formData.append('message', query);
+            }
+
+            let userMessageContent = '';
+            if (query) {
+                userMessageContent += `<p>${query}</p>`;
+            }
+            userMessageContent += `<img src="${URL.createObjectURL(imageFile)}" alt="Uploaded Image" style="max-height: 100px; border-radius: 5px; margin-top: 5px;">`;
+            addMessage(userMessageContent, true, true);
+            addMessage('Analysiere Bild und suche nach passenden Produkten...', false);
+
+            fetch('/api/products/chat_with_image', { // New endpoint
+                method: 'POST',
+                body: formData // No 'Content-Type' header, browser sets it for FormData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    addMessage(data.response, false);
+                     if (data.imageDescription) {
+                        addMessage(`<em>Bildbeschreibung: ${data.imageDescription}</em>`, false, true);
+                    }
+                    if (data.products && data.products.length > 0) {
+                        displayProducts(data.products, data.uploadedImageUrl, data.imageDescription);
+                    }
+                } else {
+                    addMessage(data.message || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.', false);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                addMessage('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.', false);
+            })
+            .finally(() => {
+                // Clear preview and file input after processing
+                clearImagePreviewButton.click();
+            });
+        }
         
-        function displayProducts(products) {
-            productResults.innerHTML = '';
+        function displayProducts(products, uploadedImageUrl = null, imageDescription = null) {
+            productResults.innerHTML = ''; // Clear previous results
+
+            // Optionally display the uploaded image and its description above products
+            if (uploadedImageUrl) {
+                const imageInfoDiv = document.createElement('div');
+                imageInfoDiv.className = 'col-12 mb-3';
+                let imageHtml = `<h4 class="mb-2">Basis für Suche:</h4><img src="${uploadedImageUrl}" alt="Hochgeladenes Bild" style="max-width: 150px; max-height: 150px; border-radius: 8px; margin-bottom: 10px;">`;
+                if (imageDescription) {
+                    imageHtml += `<p class="text-muted"><em>KI-generierte Beschreibung: ${imageDescription}</em></p>`;
+                }
+                imageInfoDiv.innerHTML = imageHtml;
+                productResults.appendChild(imageInfoDiv);
+            }
             
             products.forEach(product => {
                 const productCard = document.createElement('div');
@@ -148,8 +235,8 @@
             const query = userInput.value.trim();
             if (query) {
                 addMessage(query, true);
-                userInput.value = '';
                 searchProducts(query);
+                userInput.value = '';
             }
         });
         
@@ -158,9 +245,22 @@
                 const query = userInput.value.trim();
                 if (query) {
                     addMessage(query, true);
-                    userInput.value = '';
                     searchProducts(query);
+                    userInput.value = '';
                 }
+            }
+        });
+
+        uploadImageButton.addEventListener('click', function() {
+            const query = userInput.value.trim(); // Optional text query
+            if (currentImageFile) {
+                searchProductsWithImage(currentImageFile, query);
+                userInput.value = ''; // Clear text input
+                // imageUpload.value = ''; // Done by clearImagePreviewButton.click() in finally block
+                // currentImageFile = null; // Done by clearImagePreviewButton.click()
+                // imagePreviewContainer.style.display = 'none'; // Done by clearImagePreviewButton.click()
+            } else {
+                addMessage('Bitte wählen Sie zuerst ein Bild aus.', false);
             }
         });
         
