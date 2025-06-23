@@ -17,5 +17,5 @@ interface ImageDescriptionServiceInterface
      * @return string The generated textual description of the image.
      * @throws \Exception If description generation fails.
      */
-    public function generateDescriptionForImage(UploadedFile $imageFile, ?string $prompt = null): string;
+    public functiongenerateDescriptionForImage(UploadedFile $imageFile, ?string $prompt = null): string;
 }

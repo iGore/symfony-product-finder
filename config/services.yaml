@@ -20,6 +20,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # Controller specific configuration
+    App\Controller\ProductFinderController:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        # Autowire the rest of the arguments for the controller
+        # If you have other controllers with string $projectDir, you might want to use _defaults binding
+        # _defaults:
+        #     bind:
+        #         string $projectDir: '%kernel.project_dir%'
+
+
     App\Factory\MilvusClientFactory: ~
 
     Milvus\Client:
