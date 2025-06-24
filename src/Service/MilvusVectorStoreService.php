@@ -107,14 +107,14 @@ class MilvusVectorStoreService implements VectorStoreInterface
         $this->logger->info('Creating new Milvus collection', [
             'collection_name' => $this->collectionName,
             'dimension' => $dimension,
-            'metric_type' => 'COSINE'
+            'metric_type' => 'L2'
         ]);
 
         try {
             $this->milvus->collections()->create(
                 collectionName: $this->collectionName,
                 dimension: $dimension,
-                metricType: "COSINE",
+                metricType: "L2",
                 primaryField: "id",
                 vectorField: "vector"
             );
