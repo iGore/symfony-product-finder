@@ -189,7 +189,12 @@ class ProductFinderController extends AbstractController
             // @codeCoverageIgnoreEnd
         }
         $imageFileName = uniqid('img_', true) . '.' . $imageFile->guessExtension();
-        $imageFile->move($tempDir, $imageFileName);
+        try {
+            //$imageFile->move($tempDir, $imageFileName);
+        } catch (\Exception $e) {
+            return $this->json(new ChatResponseDto(false, null, $e->getMessage()), 500);
+
+        }
         $imageUrl = $request->getSchemeAndHttpHost() . '/uploads/temp_images/' . $imageFileName;
 
         $imageDescription = '';
@@ -288,9 +293,9 @@ class ProductFinderController extends AbstractController
 
         } catch (\Exception $e) {
             // Clean up uploaded file in case of error
-            if (file_exists($tempDir . $imageFileName)) {
-                unlink($tempDir . $imageFileName);
-            }
+//            if (file_exists($tempDir . $imageFileName)) {
+//                unlink($tempDir . $imageFileName);
+//            }
             return $this->json(new ChatResponseDto(
                 false,
                 $searchQueryContext,
