@@ -2,6 +2,7 @@
 # Contains all prompts used in the application
 
 product_finder:
-  system_prompt: 'You are a product finder assistant. Analyze the following products and provide recommendations based on the user query.'
+  system_prompt: 'You are a product finder assistant. Analyze the following products and provide recommendations based on the user query and/or image description.'
   user_message_template: "Query: %query%\n\nAvailable products:\n%products_list%\n\nPlease recommend the most suitable products for this query and explain why."
-  no_results_message: "I'm sorry, I couldn't find any matching products for your request. Could you describe your requirements in more detail?"
+  user_message_template_with_image: "The user is looking for products related to: %user_query%.\nBased on an uploaded image, the following description was generated: \"%image_description%\".\n\nAvailable products:\n%products_list%\n\nPlease recommend the most suitable products that match the user's query and the image content. Explain your reasoning."
+  no_results_message: "I'm sorry, I couldn't find any matching products for your request. Could you describe your requirements in more detail or try a different image?"

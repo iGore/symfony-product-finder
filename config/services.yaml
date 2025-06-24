@@ -20,6 +20,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # Controller specific configuration
+    App\Controller\ProductFinderController:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        # Autowire the rest of the arguments for the controller
+        # If you have other controllers with string $projectDir, you might want to use _defaults binding
+        # _defaults:
+        #     bind:
+        #         string $projectDir: '%kernel.project_dir%'
+
+
     App\Factory\MilvusClientFactory: ~
 
     Milvus\Client:
@@ -48,5 +59,11 @@ services:
         arguments:
             $chatModel: '%env(OPENAI_CHAT_MODEL)%'
 
-    # Bind the interface to the implementation
+    App\Service\OpenAIImageDescriptionService:
+        arguments:
+            # Client and Logger will be autowired
+            $openAiVisionModel: '%env(OPENAI_VISION_MODEL)%'
+
+    # Bind the interfaces to their concrete implementations
     App\Service\SearchServiceInterface: '@App\Service\OpenAISearchService'
+    App\Service\ImageDescriptionServiceInterface: '@App\Service\OpenAIImageDescriptionService'
